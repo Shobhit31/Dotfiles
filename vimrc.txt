@@ -1,0 +1,43 @@
+set runtimepath+=~/.vim_runtime
+
+source ~/.vim_runtime/vimrcs/basic.vim
+source ~/.vim_runtime/vimrcs/filetypes.vim
+source ~/.vim_runtime/vimrcs/plugins_config.vim
+source ~/.vim_runtime/vimrcs/extended.vim
+
+try
+source ~/.vim_runtime/my_configs.vim
+catch
+endtry
+
+syntax on
+set showmatch
+set ts=4
+set sts=4
+set sw=4
+set autoindent
+set smartindent
+set smarttab
+set expandtab
+set pastetoggle=<F2>
+set background=dark
+highlight Normal ctermfg=grey ctermbg=black
+
+autocmd bufnewfile *.[ch]* so $HOME/Documents/Dotfiles/cppheader.txt
+autocmd bufnewfile *.[ch]* exe "1," . 10 . "g/File Name :.*/s//File Name : " .expand("%:t")
+autocmd bufnewfile *.[ch]* exe "1," . 10 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.[ch]* execute "normal ma"
+autocmd Bufwritepre,filewritepre *.[ch]* exe "1," . 10 . "g/File Name :.*/s//File Name : " .expand("%:t")
+autocmd bufwritepost,filewritepost *.[ch]* execute "normal `a"
+
+autocmd bufnewfile *.py so $HOME/Documents/Dotfiles/pyheader.txt
+autocmd bufnewfile *.py exe "1," . 10 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.py exe "1," . 10 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.py execute "normal ma"
+autocmd bufwritepost,filewritepost *.py execute "normal `a"
+
+autocmd bufnewfile *.sh so $HOME/Documents/Dotfiles/shheader.txt
+autocmd bufnewfile *.sh exe "1," . 10 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.sh exe "1," . 10 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y")
+autocmd Bufwritepre,filewritepre *.sh execute "normal ma"
+autocmd bufwritepost,filewritepost *.sh execute "normal `a"
